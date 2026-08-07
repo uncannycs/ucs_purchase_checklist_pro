@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_form_inherit_checklist" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.checklist</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_apply_status_checklist" string="Apply Status Checklist" type="object"/>
+                <button name="action_clear_checklist" string="Clear All Items" type="object"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Checklist">
+                    <field name="checklist_item_ids">
+                        <list editable="bottom" decoration-danger="is_mandatory and not is_done">
+                            <field name="name"/>
+                            <field name="assignee_id"/>
+                            <field name="deadline"/>
+                            <field name="notes"/>
+                            <field name="is_mandatory"/>
+                            <field name="is_done"/>
+                            <field name="done_date" optional="hide" force_save="1"/>
+                            <field name="done_by_id" optional="hide" force_save="1"/>
+                        </list>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="checklist_progress" widget="progressbar"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_tree_inherit_checklist" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inherit.checklist</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="checklist_progress" widget="progressbar" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_filter_inherit_checklist" model="ir.ui.view">
+        <field name="name">purchase.order.filter.inherit.checklist</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft_rfqs']" position="after">
+                <separator/>
+                <filter string="Checklist Complete" name="checklist_complete" domain="[('checklist_progress', '=', 100)]"/>
+                <filter string="Checklist Incomplete" name="checklist_incomplete" domain="[('checklist_progress', '&lt;', 100), ('checklist_item_ids', '!=', False)]"/>
+                <filter string="No Checklist" name="no_checklist" domain="[('checklist_item_ids', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
