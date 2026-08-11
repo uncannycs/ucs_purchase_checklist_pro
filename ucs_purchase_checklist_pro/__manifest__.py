@@ -7,13 +7,13 @@
     'author': 'Uncanny Consulting Services LLP',
     'maintainers': 'Uncanny Consulting Services LLP',
     'depends': ['purchase'],
+    'license': 'Other proprietary',
     'data': [
         'security/ir.model.access.csv',
         'views/purchase_checklist_template_views.xml',
         'views/purchase_order_views.xml',
     ],
     "images": ["static/description/banner.gif"],
-    'license': 'LGPL-3',
     'installable': True,
     'application': True,
     'auto_install': False
