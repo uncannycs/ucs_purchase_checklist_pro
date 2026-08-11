@@ -6,6 +6,7 @@
     'website': 'https://uncannycs.com',
     'author': 'Uncanny Consulting Services LLP',
     'maintainers': 'Uncanny Consulting Services LLP',
+    'license': 'Other proprietary',
     'depends': ['purchase'],
     'data': [
         'security/ir.model.access.csv',
@@ -13,7 +14,6 @@
         'views/purchase_order_views.xml',
     ],
     "images": ["static/description/banner.gif"],
-    'license': 'LGPL-3',
     'installable': True,
     'application': True,
     'auto_install': False
